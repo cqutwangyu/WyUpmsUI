@@ -23,24 +23,24 @@ export function getInfo() {
   })
 }
 
-export function getAllUser() {
+export function getAll() {
   return request({
-    url: '/user/getAllUser',
+    url: '/user/getAll',
     method: 'get'
   })
 }
 
-export function deleteUser(data) {
+export function remove(data) {
   return request({
-    url: '/user/deleteUser',
+    url: '/user/remove',
     method: 'delete',
     data
   })
 }
 
-export function updateUser(data) {
+export function update(data) {
   return request({
-    url: '/user/updateUser',
+    url: '/user/update',
     method: 'put',
     data
   })

@@ -4,11 +4,9 @@ import getters from './getters'
 import app from './modules/app'
 import settings from './modules/settings'
 import user from './modules/user'
-import customer from './modules/customer'
-import contact from './modules/contact'
-import follow from './modules/follow'
-import order from './modules/order'
-import charts from './modules/charts'
+import system from './modules/system'
+import department from './modules/department'
+import role from './modules/role'
 
 Vue.use(Vuex)
 
@@ -17,11 +15,9 @@ const store = new Vuex.Store({
     app,
     settings,
     user,
-    customer,
-    contact,
-    follow,
-    order,
-    charts
+    system,
+    department,
+    role
   },
   getters
 })

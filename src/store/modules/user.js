@@ -1,4 +1,4 @@
-import { getInfo, getAllUser, deleteUser,updateUser, login, logout, register } from '@/api/user'
+import { getInfo, getAll, remove,update, login, logout, register } from '@/api/user'
 import { getToken, removeToken, setToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 import qs from 'qs'
@@ -55,10 +55,9 @@ const actions = {
       })
     })
   },
-  getAllUser() {
+  getAll() {
     return new Promise((resolve, reject) => {
-      getAllUser().then(response => {
-        Msg.success(response.message)
+      getAll().then(response => {
         resolve(response)
       }).catch(error => {
         console.log(error)
@@ -66,11 +65,11 @@ const actions = {
       })
     })
   },
-  deleteUser({}, flowId) {
+  remove({}, flowId) {
     var json = { userId: flowId }
     json = qs.stringify(json)
     return new Promise((resolve, reject) => {
-      deleteUser(json).then(response => {
+      remove(json).then(response => {
         Msg.success(response.message)
         resolve(response)
       }).catch(error => {
@@ -79,10 +78,10 @@ const actions = {
       })
     })
   },
-  updateUser({}, user) {
+  update({}, user) {
     var  userInfo = qs.stringify(user)
     return new Promise((resolve, reject) => {
-      updateUser(userInfo).then(response => {
+      update(userInfo).then(response => {
         Msg.success(response.message)
         resolve(response)
       }).catch(error => {

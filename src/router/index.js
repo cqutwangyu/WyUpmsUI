@@ -64,19 +64,44 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/permission/user',
     name: 'Permission',
-    meta: { title: '权限管理', icon: 'user' },
+    meta: { title: '用户权限管理', icon: 'user' },
     children: [
       {
-        path: 'table',
+        path: 'user',
         name: 'Table',
         component: () => import('@/views/permission/user/index'),
-        meta: { title: '用户管理', icon: 'table' }
+        meta: { title: '用户列表', icon: 'table' }
       },
       {
-        path: 'table',
+        path: 'system',
         name: 'Table',
-        component: () => import('@/views/permission/user/index'),
+        component: () => import('@/views/permission/system/index'),
+        meta: { title: '系统管理', icon: 'table' }
+      },
+      {
+        path: 'system/role',
+        name: 'Table',
+        component: () => import('@/views/permission/system/role/index'),
         meta: { title: '角色管理', icon: 'table' }
+      },
+      {
+        path: 'system/department',
+        name: 'Table',
+        component: () => import('@/views/permission/system/department/index'),
+        meta: { title: '部门管理', icon: 'table' }
+      },
+      {
+        path: 'system/menu',
+        name: 'Table',
+        component: () => import('@/views/permission/system/menu/index'),
+        meta: { title: '菜单管理', icon: 'table' }
+      },
+      {
+        path: 'system/allocation',
+        name: 'Table',
+        component: () => import('@/views/permission/allocation/index'),
+        meta: { title: '权限配置', icon: 'table' },
+        // hidden: true
       }
     ]
   },
