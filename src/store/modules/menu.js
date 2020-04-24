@@ -1,16 +1,17 @@
 import {
-  getAll,
+  list,
   add,
   remove,
   update
-} from '@/api/department'
+} from '@/api/menu'
 import { Msg } from '@/utils/message'
 import qs from 'qs'
 
 const actions = {
-  getAll({}) {
+  list({},menuQueryForm) {
+    var json = qs.stringify(menuQueryForm)
     return new Promise((resolve, reject) => {
-      getAll().then(response => {
+      list(json).then(response => {
         resolve(response)
       }).catch(error => {
         console.log(error)
@@ -19,7 +20,7 @@ const actions = {
     })
   },
   remove({}, id) {
-    var json = { depId: id }
+    var json = { menuId: id }
     json = qs.stringify(json)
     return new Promise((resolve, reject) => {
       remove(json).then(response => {
@@ -36,27 +37,27 @@ const actions = {
       })
     })
   },
-  update({}, data) {
-    data = qs.stringify(data)
+  update({}, menu) {
+    menu = qs.stringify(menu)
     return new Promise((resolve, reject) => {
-      update(data).then(response => {
+      update(menu).then(response => {
         if (response.code == 200) {
           Msg.success(response.message)
         } else {
           Msg.error(response.message)
         }
         Msg.success(response.data)
-        resolve(response)
+        resolve()
       }).catch(error => {
         console.log(error)
         reject(error)
       })
     })
   },
-  add({}, dep) {
-    dep = qs.stringify(dep)
+  add({}, menu) {
+    menu = qs.stringify(menu)
     return new Promise((resolve, reject) => {
-      add(dep).then(response => {
+      add(menu).then(response => {
         if (response.code == 200) {
           Msg.success(response.message)
         } else {

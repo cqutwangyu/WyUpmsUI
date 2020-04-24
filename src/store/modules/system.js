@@ -19,7 +19,7 @@ const actions = {
     })
   },
   remove({}, id) {
-    var json = { systemId: id }
+    var json = { sysId: id }
     json = qs.stringify(json)
     return new Promise((resolve, reject) => {
       remove(json).then(response => {

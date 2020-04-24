@@ -122,10 +122,10 @@
           this.listLoading = false
         })
       },
-      handleDelete(userId) {
+      handleDelete(sysId) {
         /* 删除数据*/
         this.listLoading = true
-        this.$store.dispatch('system/remove', userId).then(response => {
+        this.$store.dispatch('system/remove', sysId).then(response => {
           this.fetchData()
           this.listLoading = false
         })

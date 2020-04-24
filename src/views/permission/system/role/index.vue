@@ -27,7 +27,7 @@
       </el-table-column>
       <el-table-column label="所属系统" width="190">
         <template slot-scope="scope">
-          {{ scope.row.sysId }}
+          {{ scope.row.sysName }}
         </template>
       </el-table-column>
       <el-table-column label="角色名" width="190">
@@ -71,7 +71,9 @@
           <el-input v-model="roleForm.roleName"/>
         </el-form-item>
         <el-form-item label="所属系统">
-          <el-input v-model="roleForm.sysId"/>
+          <el-select v-model="roleForm.sysId" placeholder="所属系统" clearable class="filter-item" @change="handleFilter">
+            <el-option v-for="item in systemList" :key="item.flowId" :label="item.sysName" :value="item.flowId"/>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -97,6 +99,7 @@
       return {
         dialogFormVisible: false,
         dialogStatus: '',
+        systemList: '',
         textMap: {
           update: '编辑',
           create: '新增'
@@ -119,8 +122,16 @@
     },
     created() {
       this.fetchData()
+      this.getAllSystem()
     },
     methods: {
+      handleFilter() {
+      },
+      getAllSystem() {
+        this.$store.dispatch('system/getAll').then(response => {
+          this.systemList = response.data
+        })
+      },
       fetchData() {
         /* 从后台获取数据*/
         this.listLoading = true
@@ -129,10 +140,10 @@
           this.listLoading = false
         })
       },
-      handleDelete(userId) {
+      handleDelete(roleId) {
         /* 删除数据*/
         this.listLoading = true
-        this.$store.dispatch('role/remove', userId).then(response => {
+        this.$store.dispatch('role/remove', roleId).then(response => {
           this.fetchData()
           this.listLoading = false
         })

@@ -3,7 +3,7 @@ import {
   add,
   remove,
   update
-} from '@/api/department'
+} from '@/api/allocation'
 import { Msg } from '@/utils/message'
 import qs from 'qs'
 
@@ -19,7 +19,7 @@ const actions = {
     })
   },
   remove({}, id) {
-    var json = { depId: id }
+    var json = { roleId: id }
     json = qs.stringify(json)
     return new Promise((resolve, reject) => {
       remove(json).then(response => {
@@ -37,26 +37,26 @@ const actions = {
     })
   },
   update({}, data) {
-    data = qs.stringify(data)
+    var json = qs.stringify(data)
     return new Promise((resolve, reject) => {
-      update(data).then(response => {
+      update(json).then(response => {
         if (response.code == 200) {
           Msg.success(response.message)
         } else {
           Msg.error(response.message)
         }
         Msg.success(response.data)
-        resolve(response)
+        resolve()
       }).catch(error => {
         console.log(error)
         reject(error)
       })
     })
   },
-  add({}, dep) {
-    dep = qs.stringify(dep)
+  add({}, role) {
+    role = qs.stringify(role)
     return new Promise((resolve, reject) => {
-      add(dep).then(response => {
+      add(role).then(response => {
         if (response.code == 200) {
           Msg.success(response.message)
         } else {

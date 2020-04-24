@@ -27,15 +27,15 @@
       </el-table-column>
       <el-table-column label="所属系统" width="190">
         <template slot-scope="scope">
-          {{ scope.row.sysId }}
+          {{ scope.row.sysName }}
         </template>
       </el-table-column>
-      <el-table-column label="角色名" width="190">
+      <el-table-column label="部门名称" width="190">
         <template slot-scope="scope">
           {{ scope.row.depName }}
         </template>
       </el-table-column>
-      <el-table-column label="角色编号" width="190">
+      <el-table-column label="部门编号" width="190">
         <template slot-scope="scope">
           {{ scope.row.flowId }}
         </template>
@@ -71,7 +71,9 @@
           <el-input v-model="depForm.depName"/>
         </el-form-item>
         <el-form-item label="所属系统">
-          <el-input v-model="depForm.sysId"/>
+          <el-select v-model="depForm.sysName" placeholder="所属系统" clearable class="filter-item" @change="handleFilter">
+            <el-option v-for="item in systemList" :key="item.flowId" :label="item.sysName" :value="item.flowId"/>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -97,6 +99,7 @@
       return {
         dialogFormVisible: false,
         dialogStatus: '',
+        systemList:'',
         textMap: {
           update: '编辑',
           create: '新增'
@@ -119,8 +122,16 @@
     },
     created() {
       this.fetchData()
+      this.getAllSystem()
     },
     methods: {
+      handleFilter(){}
+      ,
+      getAllSystem() {
+        this.$store.dispatch('system/getAll').then(response => {
+          this.systemList = response.data
+        })
+      },
       fetchData() {
         /* 从后台获取数据*/
         this.listLoading = true

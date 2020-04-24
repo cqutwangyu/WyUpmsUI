@@ -5,8 +5,10 @@ import app from './modules/app'
 import settings from './modules/settings'
 import user from './modules/user'
 import system from './modules/system'
+import menu from './modules/menu'
 import department from './modules/department'
 import role from './modules/role'
+import allocation from './modules/allocation'
 
 Vue.use(Vuex)
 
@@ -16,8 +18,10 @@ const store = new Vuex.Store({
     settings,
     user,
     system,
+    menu,
     department,
-    role
+    role,
+    allocation
   },
   getters
 })
