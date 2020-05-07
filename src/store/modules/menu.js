@@ -1,4 +1,5 @@
 import {
+  getAll,
   list,
   add,
   remove,
@@ -19,6 +20,16 @@ const actions = {
       })
     })
   },
+  getAll({}) {
+    return new Promise((resolve, reject) => {
+      getAll().then(response => {
+        resolve(response)
+      }).catch(error => {
+        console.log(error)
+        reject(error)
+      })
+    })
+  },
   remove({}, id) {
     var json = { menuId: id }
     json = qs.stringify(json)
@@ -30,7 +41,7 @@ const actions = {
           Msg.error(response.message)
         }
         Msg.success(response.data)
-        resolve()
+        resolve(response)
       }).catch(error => {
         console.log(error)
         reject(error)
@@ -47,7 +58,7 @@ const actions = {
           Msg.error(response.message)
         }
         Msg.success(response.data)
-        resolve()
+        resolve(response)
       }).catch(error => {
         console.log(error)
         reject(error)

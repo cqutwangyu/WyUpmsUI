@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 <template>
   <div class="app-container">
     <div class="filter-container">
@@ -35,7 +36,7 @@
           {{ scope.row.flowId }}
         </template>
       </el-table-column>
-      <el-table-column label="所属系统" width="190">
+      <!-- <el-table-column label="所属系统" width="190">
         <template slot-scope="scope">
           {{ scope.row.roles }}
         </template>
@@ -49,7 +50,7 @@
         <template slot-scope="scope">
           {{ scope.row.roles }}
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column :label="$t('table.actions')" align="center" width="300" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button size="mini" type="primary" @click="handleUpdate(row)">
@@ -78,13 +79,23 @@
         style="width: 400px; margin-left:150px;"
       >
         <el-form-item label="用户名">
-          <el-input v-model="userForm.userName"/>
+          <el-input v-model="userForm.userName" />
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="userForm.password"/>
+          <el-input v-model="userForm.password" />
         </el-form-item>
         <el-form-item label="昵称">
-          <el-input v-model="userForm.petName"/>
+          <el-input v-model="userForm.petName" />
+        </el-form-item>
+        <el-form-item label="用户角色">
+          <el-select v-model="selectRole" multiple placeholder="请选择">
+            <el-option
+              v-for="item in roleList"
+              :key="item.flowId"
+              :label="item.roleName"
+              :value="item.flowId"
+            />
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -100,109 +111,122 @@
 </template>
 
 <script>
-  import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-  import waves from '@/directive/waves' // waves directive
+import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import waves from '@/directive/waves' // waves directive
 
-  export default {
-    components: { Pagination },
-    directives: { waves },
-    data() {
-      return {
-        dialogFormVisible: false,
-        dialogStatus: '',
-        textMap: {
-          update: '编辑',
-          create: '新增'
-        },
-        userForm: {
-          flowId: '',
-          userName: '',
-          petName: '',
-          password: ''
-        },
-        list: null,
-        total: 0,
-        listLoading: true,
-        pageQueryDTO: {
-          page: 1,
-          limit: 10,
-          columnsName: [],
-          columnsValue: []
-        }
+export default {
+  components: { Pagination },
+  directives: { waves },
+  data() {
+    return {
+      dialogFormVisible: false,
+      dialogStatus: '',
+      textMap: {
+        update: '编辑',
+        create: '新增'
+      },
+      userForm: {
+        flowId: '',
+        userName: '',
+        petName: '',
+        password: ''
+      },
+      list: null,
+      roleList: null,
+      selectRole: null,
+      total: 0,
+      listLoading: true,
+      pageQueryDTO: {
+        page: 1,
+        limit: 10,
+        columnsName: [],
+        columnsValue: []
       }
+    }
+  },
+  created() {
+    this.fetchData()
+    this.getAllRole()
+  },
+  methods: {
+    fetchData() {
+      /* 从后台获取数据*/
+      this.listLoading = true
+      this.$store.dispatch('user/getAll', this.pageQueryDTO).then(response => {
+        this.list = response.data
+        this.listLoading = false
+      })
     },
-    created() {
-      this.fetchData()
-    },
-    methods: {
-      fetchData() {
-        /* 从后台获取数据*/
-        this.listLoading = true
-        this.$store.dispatch('user/getAll', this.pageQueryDTO).then(response => {
-          this.list = response.data
-          this.listLoading = false
-        })
-      },
-      handleDelete(userId) {
-        /* 删除数据*/
-        this.listLoading = true
-        this.$store.dispatch('user/remove', userId).then(response => {
+    handleDelete(userId) {
+      /* 删除数据*/
+      this.listLoading = true
+      this.$store.dispatch('user/remove', userId).then(response => {
+        // eslint-disable-next-line indent
           this.fetchData()
-          this.listLoading = false
-        })
-      },
-      handleCreate() {
-        /* 打开新增数据窗口*/
-        this.resetUserForm()
-        this.dialogStatus = 'create'
-        this.dialogFormVisible = true
-        this.$nextTick(() => {
-          this.$refs['userForm'].clearValidate()
-        })
-      },
-      handleUpdate(row) {
-        /* 打开编辑数据窗口*/
-        this.userForm = Object.assign({}, row) // copy obj
-        this.dialogStatus = 'update'
-        this.dialogFormVisible = true
-        this.$nextTick(() => {
-          this.$refs['userForm'].clearValidate()
-        })
-      },
-      createData() {
-        /* 发送新增数据*/
-        this.$refs.userForm.validate((valid) => {
-          if (valid) {
-            this.$store.dispatch('user/register', this.userForm).then(response => {
-              if (response.message === 'succeed') {
-                this.dialogFormVisible = false
-                this.fetchData()
-              }
-            })
-          }
-        })
-      },
-      updateData() {
-        /* 发送修改数据*/
-        this.$refs.userForm.validate((valid) => {
-          if (valid) {
-            this.$store.dispatch('user/update', this.userForm).then(response => {
-              if (response.message === 'succeed') {
-                this.dialogFormVisible = false
-                this.fetchData()
-              }
-            })
-          }
-        })
-      },
-      resetUserForm() {
-        /* 表单数据清空*/
-        this.userForm = {
-          userName: '',
-          petName: '',
-          password: ''
+        this.listLoading = false
+      })
+    },
+    handleCreate() {
+      /* 打开新增数据窗口*/
+      this.resetUserForm()
+      this.dialogStatus = 'create'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['userForm'].clearValidate()
+      })
+    },
+    handleUpdate(row) {
+      /* 打开编辑数据窗口*/
+      this.userForm = Object.assign({}, row) // copy obj
+      this.selectRole = []
+      for (let i = 0; i < row.roles.length; i++) {
+        this.selectRole.push(row.roles[i].flowId)
+      }
+      this.dialogStatus = 'update'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['userForm'].clearValidate()
+      })
+    },
+    createData() {
+      /* 发送新增数据*/
+      this.$refs.userForm.validate((valid) => {
+        if (valid) {
+          this.$store.dispatch('user/register', this.userForm).then(response => {
+            if (response.message === 'succeed') {
+              this.dialogFormVisible = false
+              this.fetchData()
+            }
+          })
         }
+      })
+    },
+    updateData() {
+      /* 发送修改数据*/
+      this.$refs.userForm.validate((valid) => {
+        if (valid) {
+          this.$store.dispatch('user/update', this.userForm).then(response => {
+            if (response.message === 'succeed') {
+              this.dialogFormVisible = false
+              this.fetchData()
+            }
+          })
+        }
+      })
+    },
+    getAllRole() {
+      this.$store.dispatch('role/getAll').then(response => {
+        this.roleList = response.data
+      })
+    },
+    resetUserForm() {
+      /* 表单数据清空*/
+      this.userForm = {
+        userName: '',
+        petName: '',
+        password: ''
       }
     }
   }
+}
 </script>

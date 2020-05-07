@@ -7,6 +7,13 @@ export function list(data) {
     data
   })
 }
+export function getAll(data) {
+  return request({
+    url: '/system/menu/getAll',
+    method: 'get',
+    data
+  })
+}
 export function add(data) {
   return request({
     url: '/system/menu/add',

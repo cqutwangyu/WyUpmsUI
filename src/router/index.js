@@ -105,27 +105,27 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/analyze',
-    component: Layout,
-    redirect: '/analyze/MixChart',
-    name: 'Analyze',
-    meta: { title: '系统管理', icon: 'user' },
-    children: [
-      {
-        path: 'MixChart',
-        name: 'MixChart',
-        component: () => import('@/views/permission/user/index'),
-        meta: { title: '系统列表', icon: 'chart' }
-      },
-      {
-        path: 'CustomerMap',
-        name: 'MixChart',
-        component: () => import('@/views/permission/user/index'),
-        meta: { title: '客户地图', icon: 'chart' }
-      }
-    ]
-  },
+  // {
+  //   path: '/analyze',
+  //   component: Layout,
+  //   redirect: '/analyze/MixChart',
+  //   name: 'Analyze',
+  //   meta: { title: '系统管理', icon: 'user' },
+  //   children: [
+  //     {
+  //       path: 'MixChart',
+  //       name: 'MixChart',
+  //       component: () => import('@/views/permission/user/index'),
+  //       meta: { title: '系统列表', icon: 'chart' }
+  //     },
+  //     {
+  //       path: 'CustomerMap',
+  //       name: 'MixChart',
+  //       component: () => import('@/views/permission/user/index'),
+  //       meta: { title: '客户地图', icon: 'chart' }
+  //     }
+  //   ]
+  // },
   {
     path: 'github-link',
     component: Layout,
