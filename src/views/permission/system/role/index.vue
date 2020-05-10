@@ -52,13 +52,13 @@
       </el-table-column>
     </el-table>
 
-    <pagination
+    <!-- <pagination
       v-show="total>0"
       :total="total"
       :page.sync="pageQueryDTO.page"
       :limit.sync="pageQueryDTO.limit"
       @pagination="fetchData"
-    />
+    /> -->
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form
@@ -71,8 +71,13 @@
           <el-input v-model="roleForm.roleName"/>
         </el-form-item>
         <el-form-item label="所属系统">
-          <el-select v-model="roleForm.sysId" placeholder="所属系统" clearable class="filter-item" @change="handleFilter">
+          <el-select v-model="roleForm.sysId" placeholder="请选择系统" clearable class="filter-item" @change="handleFilter">
             <el-option v-for="item in systemList" :key="item.flowId" :label="item.sysName" :value="item.flowId"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="所属部门">
+          <el-select v-model="roleForm.depId" placeholder="请选择部门" clearable class="filter-item" @change="handleFilter">
+            <el-option v-for="item in departmentList" :key="item.flowId" :label="item.depName" :value="item.flowId"/>
           </el-select>
         </el-form-item>
       </el-form>
@@ -99,6 +104,7 @@
       return {
         dialogFormVisible: false,
         dialogStatus: '',
+        departmentList: '',
         systemList: '',
         textMap: {
           update: '编辑',
@@ -107,7 +113,8 @@
         roleForm: {
           flowId: '',
           roleName: '',
-          sysId: ''
+          sysId: '',
+          depId: ''
         },
         list: null,
         total: 0,
@@ -123,10 +130,16 @@
     created() {
       this.fetchData()
       this.getAllSystem()
+      this.getAllDepartment()
     },
     methods: {
       handleFilter() {
       },
+    getAllDepartment() {
+      this.$store.dispatch("department/getAll").then(response => {
+        this.departmentList = response.data
+      })
+    },
       getAllSystem() {
         this.$store.dispatch('system/getAll').then(response => {
           this.systemList = response.data
@@ -160,6 +173,9 @@
       handleUpdate(row) {
         /* 打开编辑数据窗口*/
         this.roleForm = Object.assign({}, row) // copy obj
+        if(row.depId == 0) {
+           this.roleForm.depId = null
+        }
         this.dialogStatus = 'update'
         this.dialogFormVisible = true
         this.$nextTick(() => {
@@ -197,7 +213,8 @@
         this.roleForm = {
           flowId: '',
           roleName: '',
-          sysId: ''
+          sysId: '',
+          depId:''
         }
       }
     }

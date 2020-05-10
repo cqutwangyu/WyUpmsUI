@@ -46,7 +46,7 @@ const actions = {
           Msg.error(response.message)
         }
         Msg.success(response.data)
-        resolve()
+        resolve(response)
       }).catch(error => {
         console.log(error)
         reject(error)

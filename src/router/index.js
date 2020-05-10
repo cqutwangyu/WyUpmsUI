@@ -31,17 +31,17 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
-  {
-    path: '/login',
-    component: () => import('@/views/welcome/login/index'),
-    hidden: true
-  },
+  // {
+  //   path: '/login',
+  //   component: () => import('@/views/welcome/login/index'),
+  //   hidden: true
+  // },
 
-  {
-    path: '/register',
-    component: () => import('@/views/welcome/register/index'),
-    hidden: true
-  },
+  // {
+  //   path: '/register',
+  //   component: () => import('@/views/welcome/register/index'),
+  //   hidden: true
+  // },
 
   {
     path: '/404',
@@ -56,8 +56,9 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
-    }]
+      meta: { title: '个人信息', icon: 'dashboard' }
+    }],
+    hidden: true
   },
   {
     path: '/permission',
@@ -94,13 +95,13 @@ export const constantRoutes = [
         path: 'system/menu',
         name: 'Table',
         component: () => import('@/views/permission/system/menu/index'),
-        meta: { title: '菜单管理', icon: 'table' }
+        meta: { title: '菜单管理', icon: 'tree' }
       },
       {
         path: 'system/allocation',
         name: 'Table',
         component: () => import('@/views/permission/allocation/index'),
-        meta: { title: '权限配置', icon: 'table' },
+        meta: { title: '权限配置', icon: 'tree' },
         // hidden: true
       }
     ]
@@ -126,16 +127,16 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
-  {
-    path: 'github-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://github.com/ChongqingWangYu',
-        meta: { title: 'GitHub Link', icon: 'link' }
-      }
-    ]
-  },
+  // {
+  //   path: 'github-link',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'https://github.com/ChongqingWangYu',
+  //       meta: { title: 'GitHub Link', icon: 'link' }
+  //     }
+  //   ]
+  // },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

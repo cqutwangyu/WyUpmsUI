@@ -47,13 +47,13 @@
       </el-table-column>
     </el-table>
 
-    <pagination
+    <!-- <pagination
       v-show="total>0"
       :total="total"
       :page.sync="pageQueryDTO.page"
       :limit.sync="pageQueryDTO.limit"
       @pagination="fetchData"
-    />
+    /> -->
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form

@@ -52,13 +52,13 @@
       </el-table-column>
     </el-table>
 
-    <pagination
+    <!-- <pagination
       v-show="total>0"
       :total="total"
       :page.sync="pageQueryDTO.page"
       :limit.sync="pageQueryDTO.limit"
       @pagination="fetchData"
-    />
+    /> -->
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form
@@ -71,7 +71,7 @@
           <el-input v-model="depForm.depName"/>
         </el-form-item>
         <el-form-item label="所属系统">
-          <el-select v-model="depForm.sysName" placeholder="所属系统" clearable class="filter-item" @change="handleFilter">
+          <el-select v-model="depForm.sysId" placeholder="所属系统" clearable class="filter-item" @change="handleFilter">
             <el-option v-for="item in systemList" :key="item.flowId" :label="item.sysName" :value="item.flowId"/>
           </el-select>
         </el-form-item>

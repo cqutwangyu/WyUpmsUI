@@ -112,6 +112,7 @@ export default {
       roleList: "",
       data: [],
       menuForm: {
+        flowId: null,
         userId: null,
         sysId: null,
         depId: null,
@@ -158,6 +159,8 @@ export default {
     getAllRole() {
       this.$store.dispatch("role/getAll").then(response => {
         this.roleList = response.data
+        this.menuForm.roleId=this.roleList[0].flowId
+        this.selectName=this.roleList[0].roleName
       })
     },
     handleDepNodeClick(data) {
@@ -229,6 +232,7 @@ export default {
     },
     updatePower(data) {
       this.menuForm.sysId = this.systemId
+      this.menuForm.flowId = data.perId
       this.menuForm.menuId = data.flowId
       this.menuForm.query = data.query
       this.menuForm.edit = data.edit
@@ -247,6 +251,7 @@ export default {
         sysId: this.menuForm.sysId,
         depId: this.menuForm.depId,
         roleId: this.menuForm.roleId,
+        flowId: null,
         menuId: null,
         menuParentId: null,
         query: null,
