@@ -96,7 +96,8 @@ const actions = {
       getInfo().then(response => {
         console.log(response)
         const { data } = response
-        if (!data) {
+        if (!data||data.activated!=9527) {
+          Msg.error('没有获得足够的登录权限')
           reject('Verification failed, please Login again.')
         }
         const { petName, avatar } = data

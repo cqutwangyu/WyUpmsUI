@@ -7,11 +7,11 @@ export function list(data) {
     data
   })
 }
-export function getAll(data) {
+export function getAll(sysId) {
   return request({
     url: '/system/menu/getAll',
     method: 'get',
-    data
+    params: {sysId:sysId}
   })
 }
 export function add(data) {

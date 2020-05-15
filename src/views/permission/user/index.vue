@@ -200,13 +200,9 @@ export default {
       }
       var departmentList=[]
       Object.assign(departmentList,this.departmentListAll) 
-      if (this.userForm.sysId == "") {
-        this.userForm.depId = "";
-      } 
       for(let i=departmentList.length-1;i>=0;i--){
         if (departmentList[i].sysId != this.userForm.sysId) {
           departmentList.splice(i, 1);
-        }else{
         }
       }
       this.departmentList=departmentList
@@ -221,7 +217,6 @@ export default {
       for(let i=roleList.length-1;i>=0;i--){
         if (roleList[i].depId != this.userForm.depId) {
           roleList.splice(i, 1);
-        }else{
         }
       }
       this.roleList=roleList

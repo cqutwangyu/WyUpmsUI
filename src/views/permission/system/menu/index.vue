@@ -147,6 +147,7 @@
 </style>
 <script>
 import IconSelect from "@/components/IconSelect";
+import { Msg } from '@/utils/message'
 export default {
   components: { IconSelect },
   data() {
@@ -194,15 +195,19 @@ export default {
       this.menuForm.icon = name;
     },
     listMenuTreeNode() {
-      this.menuQueryForm.sysId = this.selectdSys.flowId;
-      this.$store.dispatch("menu/getAll", this.menuQueryForm).then(response => {
+      // this.menuQueryForm.sysId = this.selectdSys.flowId;
+      if(this.menuQueryForm.sysId==""||this.menuQueryForm.sysId==null){
+        Msg.success("请选择系统")
+        return
+      }
+      this.$store.dispatch("menu/getAll", this.menuQueryForm.sysId).then(response => {
         this.data = response.data;
       });
     },
     getAllSystemAndMenu() {
       this.$store.dispatch("system/getAll").then(response => {
         this.systemList = response.data;
-        this.selectdSys = this.systemList[0];
+        // this.selectdSys = this.systemList[0];
         this.listMenuTreeNode();
       });
     },
@@ -241,6 +246,22 @@ export default {
         });
     },
     createData() {
+      // var sendData = {
+      // menuForm: {
+      //   flowId: null,
+      //   sysId: null,
+      //   menuName: null,
+      //   menuLevel: null,
+      //   menuParentId: null,
+      //   icon: null,
+      //   component: null,
+      //   perms: null,
+      //   path: null,
+      //   orderNum: null,
+      //   children: null
+      // },
+      // }
+      this.menuForm.children=[]
       /* 发送新增数据*/
       this.$store.dispatch("menu/add", this.menuForm).then(response => {
         if (response.message === "succeed") {

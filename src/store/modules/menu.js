@@ -20,9 +20,9 @@ const actions = {
       })
     })
   },
-  getAll({}) {
+  getAll({},sysId) {
     return new Promise((resolve, reject) => {
-      getAll().then(response => {
+      getAll(sysId).then(response => {
         resolve(response)
       }).catch(error => {
         console.log(error)

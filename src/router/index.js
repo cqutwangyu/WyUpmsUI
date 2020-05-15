@@ -80,16 +80,16 @@ export const constantRoutes = [
         meta: { title: '系统管理', icon: 'table' }
       },
       {
-        path: 'system/role',
-        name: 'Table',
-        component: () => import('@/views/permission/system/role/index'),
-        meta: { title: '角色管理', icon: 'table' }
-      },
-      {
         path: 'system/department',
         name: 'Table',
         component: () => import('@/views/permission/system/department/index'),
         meta: { title: '部门管理', icon: 'table' }
+      },
+      {
+        path: 'system/role',
+        name: 'Table',
+        component: () => import('@/views/permission/system/role/index'),
+        meta: { title: '角色管理', icon: 'table' }
       },
       {
         path: 'system/menu',
