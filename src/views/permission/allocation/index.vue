@@ -5,13 +5,13 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <el-tabs v-model="activeName">
-              <el-tab-pane label="部门" name="first">
+              <!-- <el-tab-pane label="部门" name="first">
                 <el-tree
                   :data="departmentList"
                   :props="{label:'depName'}"
                   @node-click="handleDepNodeClick"
                 ></el-tree>
-              </el-tab-pane>
+              </el-tab-pane> -->
               <el-tab-pane label="角色" name="second">
                 <el-tree
                   :data="roleList"
@@ -19,13 +19,13 @@
                   @node-click="handleRoleNodeClick"
                 ></el-tree>
               </el-tab-pane>
-              <el-tab-pane label="用户" name="third">
+              <!-- <el-tab-pane label="用户" name="third">
                 <el-tree
                   :data="userList"
                   :props="{label:'petName'}"
                   @node-click="handleUserNodeClick"
                 ></el-tree>
-              </el-tab-pane>
+              </el-tab-pane> -->
             </el-tabs>
           </div>
         </el-card>

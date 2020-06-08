@@ -76,10 +76,10 @@
         style="width: 400px; margin-left:150px;"
       >
         <el-form-item label="用户名">
-          <el-input v-model="userForm.userName" />
+          <el-input v-model="userForm.userName"/>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="userForm.password" />
+          <el-input v-model="userForm.password" type="password"/>
         </el-form-item>
         <el-form-item label="昵称">
           <el-input v-model="userForm.petName" />
